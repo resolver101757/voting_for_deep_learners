@@ -3,9 +3,9 @@ import validators
 
 # Pre-populated list of links
 default_links = [
-    {'url': 'https://example.com', 'comment': 'This is an example link.', 'votes': 5},
-    {'url': 'https://openai.com', 'comment': 'Check out OpenAI!', 'votes': 3},
-    {'url': 'https://streamlit.io', 'comment': 'Streamlit is awesome for building ML apps.', 'votes': 4},
+    {'url': 'https://arxiv.org/abs/2403.03920', 'comment': 'Enhancing Instructional Quality: Leveraging Computer-Assisted Textual Analysis to Generate In-Depth Insights from Educational Artifacts', 'votes': 5},
+    {'url': 'https://arxiv.org/abs/2403.03894', 'comment': 'IRCoder: Intermediate Representations Make Language Models Robust Multilingual Code Generators', 'votes': 3},
+    {'url': 'https://arxiv.org/abs/2403.03832', 'comment': 'Your device may know you better than you know yourself -- continuous authentication on novel dataset using machine learning', 'votes': 4},
 ]
 
 # Initialize session state for storing links if it doesn't exist
