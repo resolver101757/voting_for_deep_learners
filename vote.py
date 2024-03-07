@@ -1,21 +1,26 @@
 import streamlit as st
 import validators
 
+# Pre-populated list of links
+default_links = [
+    {'url': 'https://example.com', 'comment': 'This is an example link.', 'votes': 5},
+    {'url': 'https://openai.com', 'comment': 'Check out OpenAI!', 'votes': 3},
+    {'url': 'https://streamlit.io', 'comment': 'Streamlit is awesome for building ML apps.', 'votes': 4},
+]
+
 # Initialize session state for storing links if it doesn't exist
 if 'links' not in st.session_state:
-    st.session_state['links'] = []
+    st.session_state['links'] = default_links.copy()  # Use a copy to avoid modifying the original list
 
-st.title('Paper voting app for deep learening group')
+st.title('Link Sharing App')
 
 with st.form(key='link_form'):
-    link_url = st.text_input('Url to the paper', help='Enter the URL of the link you want to share.')
-    link_comment = st.text_area('Descreption of the paper and any personal thoughts', help='Add a comment for your link.')
+    link_url = st.text_input('Link URL', help='Enter the URL of the link you want to share.')
+    link_comment = st.text_area('Comment', help='Add a comment for your link.')
     submit_link = st.form_submit_button('Add Link')
 
 if submit_link and link_url:
-    # Validate the URL
     if validators.url(link_url):
-        # Check if the link already exists
         existing_links = [link['url'] for link in st.session_state.links]
         if link_url not in existing_links:
             st.session_state.links.append({
@@ -26,17 +31,13 @@ if submit_link and link_url:
         else:
             st.error('This link already exists.')
     else:
-        # If the URL is not valid, display an error message
         st.error('The URL you entered is not valid. Please enter a valid URL.')
-
-# Display the links and their comments using the enhanced display method
-links_container = st.container()
-
-
 
 # Sort the links by votes in descending order before displaying them
 sorted_links = sorted(st.session_state.links, key=lambda x: x['votes'], reverse=True)
 
+# Display the links and their comments using a more structured layout
+links_container = st.container()
 
 for i, link in enumerate(sorted_links):
     with links_container.expander(f"Link #{i+1}: {link['url']} ({link['votes']} votes)", expanded=True):
